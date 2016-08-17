@@ -69,6 +69,7 @@ GEM
     factory_girl_rails (4.7.0)
       factory_girl (~> 4.7.0)
       railties (>= 3.0.0)
+    ffaker (2.2.0)
     ffi (1.9.14)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
@@ -203,6 +204,7 @@ DEPENDENCIES
   database_cleaner (~> 1.5, >= 1.5.3)
   dotenv-rails
   factory_girl_rails (~> 4.7)
+  ffaker
   listen (~> 3.0.5)
   pg (~> 0.18)
   pry-byebug
