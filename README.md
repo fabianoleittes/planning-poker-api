@@ -1,24 +1,19 @@
-# README
+# Planning Poker API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Getting Started
 
-Things you may want to cover:
+After you have cloned this repo, run this setup script to set up your machine
+with the necessary dependencies to run and test this app:
 
-* Ruby version
+    % ./bin/setup
 
-* System dependencies
+It assumes you have a machine equipped with Ruby, Postgres, etc. If not, set up
+your machine with [this script].
 
-* Configuration
+[this script]: https://github.com/thoughtbot/laptop
 
-* Database creation
+After setting up, you can run the application using [Heroku Local]:
 
-* Database initialization
+    % heroku local
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+[Heroku Local]: https://devcenter.heroku.com/articles/heroku-local
