@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160816175301) do
+ActiveRecord::Schema.define(version: 20160818184518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,4 +22,13 @@ ActiveRecord::Schema.define(version: 20160816175301) do
     t.index ["name"], name: "index_backlogs_on_name", using: :btree
   end
 
+  create_table "stories", force: :cascade do |t|
+    t.string   "description", default: "", null: false
+    t.integer  "backlog_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["backlog_id"], name: "index_stories_on_backlog_id", using: :btree
+  end
+
+  add_foreign_key "stories", "backlogs"
 end
