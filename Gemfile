@@ -32,6 +32,7 @@ group :test do
   gem "database_cleaner",     "~> 1.5", ">= 1.5.3"
   gem "shoulda-matchers",     "~> 3.1", ">= 3.1.1", require: false
   gem "ffaker"
+  gem "json_matchers"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
