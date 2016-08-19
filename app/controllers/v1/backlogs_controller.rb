@@ -3,7 +3,7 @@ module V1
     before_action :set_backlog, only: %i[show update destroy]
 
     def index
-      @backlogs = Backlog.all
+      @backlogs = Backlog.includes(:stories).all
       render json: @backlogs
     end
 
