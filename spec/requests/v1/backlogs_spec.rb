@@ -1,37 +1,45 @@
 require "rails_helper"
 
 describe "Backlogs API", type: :request do
+  let(:backlog) { create(:backlog) }
+
   describe "GET /v1/backlogs" do
+    before do
+      create_list(:backlog, 5)
+      get "/v1/backlogs", headers: json_request_headers
+    end
+
+    it "responds with 200" do
+      expect(response).to have_http_status(:ok)
+    end
+
+    it "returns content_type" do
+      expect(response.content_type).to eq("application/json")
+    end
 
     it "returns all the backlogs" do
-      create_list(:backlog, 5)
-
-      get "/v1/backlogs", json_request_headers
-
-      expect(response).to have_http_status(:ok)
-      expect(response.content_type).to eq("application/json")
+      expect(response).to match_response_schema("backlogs")
       expect(Backlog.count).to eq(5)
-
-      body = response_json
-
-      body["data"].map{ |m| m["attributes"]["name"] }
     end
   end
 
   describe "GET /v1/backlogs/:id" do
 
+    before { get "/v1/backlogs/#{backlog.id}", headers: json_request_headers }
+
     it "returns a requested backlog" do
-      backlog =  create(:backlog, name: "dev")
-
-      get "/v1/backlogs/#{backlog.id}", json_request_headers
-
-      expect(response).to have_http_status(:ok)
-      expect(response.content_type).to eq("application/json")
-
-      body = response_json
+      body         = response_json
       backlog_name = body["data"]["attributes"]["name"]
 
-      expect(backlog_name).to eq("dev")
+      expect(backlog_name).to eq(backlog.name)
+    end
+
+    it "responds with 200" do
+      expect(response).to have_http_status(:ok)
+    end
+
+    it "returns content_type" do
+      expect(response.content_type).to eq("application/json")
     end
   end
 
@@ -39,17 +47,11 @@ describe "Backlogs API", type: :request do
     context "with valid data" do
       it "create a backlog" do
 
-        backlog_params = {
-          backlog: {
-            name: "DEV"
-          }
-        }.to_json
-
-        post "/v1/backlogs", backlog_params, json_request_headers
+        post "/v1/backlogs", params: backlog.to_json, headers: json_request_headers
 
         expect(response).to have_http_status(:created)
         expect(response.content_type).to eq("application/json")
-        expect(Backlog.first.name).to eq("DEV")
+        expect(Backlog.first.name).to eq(backlog.name)
 
       end
     end
@@ -60,7 +62,7 @@ describe "Backlogs API", type: :request do
           backlog: { name: ""}
         }.to_json
 
-        post "/v1/backlogs", backlog_params, json_request_headers
+        post "/v1/backlogs", params: backlog_params, headers: json_request_headers
 
         expect(response.content_type).to eq("application/json")
         expect(response).to have_http_status(:unprocessable_entity)
@@ -71,33 +73,30 @@ describe "Backlogs API", type: :request do
   describe "PUT /v1/backlogs/:id" do
     context "with valid date" do
       it "updates the specified backlog" do
-        dev =  create(:backlog, name: "dev")
 
         backlog_params = {
           backlog: { name: "marketing"}
         }.to_json
 
-        put "/v1/backlogs/#{dev.id}", backlog_params, json_request_headers
+        put "/v1/backlogs/#{backlog.id}", params: backlog_params, headers: json_request_headers
 
         expect(response.content_type).to eq("application/json")
         expect(response).to have_http_status(:ok)
 
-        body = response_json
-
+        body         = response_json
         backlog_name = body["data"]["attributes"]["name"]
+
         expect(backlog_name).to eq("marketing")
       end
     end
 
     context "with invalid data" do
       it "returns error code" do
-        dev =  create(:backlog, name: "dev")
-
         backlog_params = {
           backlog: { name: ""}
         }.to_json
 
-        put "/v1/backlogs/#{dev.id}", backlog_params, json_request_headers
+        put "/v1/backlogs/#{backlog.id}", params: backlog_params, headers: json_request_headers
 
         expect(response.content_type).to eq("application/json")
         expect(response).to have_http_status(:unprocessable_entity)
@@ -107,9 +106,7 @@ describe "Backlogs API", type: :request do
 
   describe "DELETE /backlogs/:id" do
     it "deletes the specified backlog" do
-      dev =  create(:backlog)
-
-      delete "/v1/backlogs/#{dev.id}"
+      delete "/v1/backlogs/#{backlog.id}"
 
       expect(response).to have_http_status(:no_content)
     end
