@@ -1,0 +1,21 @@
+{
+  "properties": {
+    "user" : {
+      "type" : "object",
+      "required" : [
+        "id",
+        "full_name",
+        "kind",
+        "email"
+      ],
+      "properties" : {
+        "id" : { "type" : "integer" },
+        "full_name" : { "type" : "string" },
+        "email" : { "type" : "string" },
+        "kind" : { "type" : "string" },
+        "created_at" : { "type" : "string", "format": "date-time" },
+        "updated_at" : { "type" : "string", "format": "date-time" }
+      }
+    }
+  }
+}
