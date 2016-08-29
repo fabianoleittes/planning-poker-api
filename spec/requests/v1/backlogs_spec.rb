@@ -1,11 +1,12 @@
 require "rails_helper"
 
 describe "Backlogs API", type: :request do
-  let(:backlog) { create(:backlog) }
+  let(:user)    { create(:user) }
+  let(:backlog) { create(:backlog, user: user) }
 
   describe "GET /v1/backlogs" do
     before do
-      create_list(:backlog, 5)
+      create_list(:backlog, 5, user: user)
       get "/v1/backlogs", headers: json_request_headers
     end
 

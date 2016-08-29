@@ -37,7 +37,7 @@ module V1
 
 
     def backlog_params
-      params.require(:backlog).permit(:name)
+      params.require(:backlog).permit(:name, :user_id)
     end
 
     def set_backlog
