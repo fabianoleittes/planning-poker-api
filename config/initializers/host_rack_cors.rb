@@ -1,1 +1,1 @@
-Rails.application.config.host = "localhost:3000"
+Rails.application.config.host = ENV.fetch("APPLICATION_HOST")
