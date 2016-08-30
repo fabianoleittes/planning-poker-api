@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160829191557) do
+ActiveRecord::Schema.define(version: 20160829202756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,18 @@ ActiveRecord::Schema.define(version: 20160829191557) do
     t.integer  "user_id",                 null: false
     t.index ["name"], name: "index_backlogs_on_name", using: :btree
     t.index ["user_id"], name: "index_backlogs_on_user_id", using: :btree
+  end
+
+  create_table "scores", force: :cascade do |t|
+    t.integer  "value"
+    t.integer  "user_id"
+    t.integer  "backlog_id"
+    t.integer  "story_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["backlog_id"], name: "index_scores_on_backlog_id", using: :btree
+    t.index ["story_id"], name: "index_scores_on_story_id", using: :btree
+    t.index ["user_id"], name: "index_scores_on_user_id", using: :btree
   end
 
   create_table "stories", force: :cascade do |t|
@@ -41,5 +53,8 @@ ActiveRecord::Schema.define(version: 20160829191557) do
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 
+  add_foreign_key "scores", "backlogs"
+  add_foreign_key "scores", "stories"
+  add_foreign_key "scores", "users"
   add_foreign_key "stories", "backlogs"
 end

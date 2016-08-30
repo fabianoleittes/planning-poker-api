@@ -1,0 +1,23 @@
+{
+  "properties": {
+    "score" : {
+      "type" : "object",
+      "required" : [
+        "id",
+        "value",
+        "user_id",
+        "backlog_id",
+        "story_id"
+      ],
+      "properties" : {
+        "id" : { "type" : "integer" },
+        "value" : { "type" : "integer" },
+        "user_id" : { "type" : "integer" },
+        "backlog_id" : { "type" : "integer" },
+        "story_id" : { "type" : "integer" },
+        "created_at" : { "type" : "string", "format": "date-time" },
+        "updated_at" : { "type" : "string", "format": "date-time" }
+      }
+    }
+  }
+}
