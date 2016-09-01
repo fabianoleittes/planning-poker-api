@@ -1,5 +1,7 @@
 # Planning Poker API
 
+[![Code Climate](https://codeclimate.com/github/fabianoleittes/planning-poker-api/badges/gpa.svg)](https://codeclimate.com/github/fabianoleittes/planning-poker-api)
+
 ## Getting Started
 
 After you have cloned this repo, run this setup script to set up your machine
