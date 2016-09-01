@@ -1,0 +1,19 @@
+{
+  "properties": {
+    "story" : {
+      "type" : "object",
+      "required" : [
+        "id",
+        "description",
+        "backlog_id"
+      ],
+      "properties" : {
+        "id" : { "type" : "integer" },
+        "description" : { "type" : "integer" },
+        "backlog_id" : { "type" : "integer" },
+        "created_at" : { "type" : "string", "format": "date-time" },
+        "updated_at" : { "type" : "string", "format": "date-time" }
+      }
+    }
+  }
+}

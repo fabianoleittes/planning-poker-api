@@ -29,10 +29,7 @@ describe "Backlogs API", type: :request do
     before { get "/v1/backlogs/#{backlog.id}", headers: json_request_headers }
 
     it "returns a requested backlog" do
-      body         = response_json
-      backlog_name = body["data"]["attributes"]["name"]
-
-      expect(backlog_name).to eq(backlog.name)
+      expect(response).to match_response_schema("backlogs")
     end
 
     it "responds with 200" do
@@ -48,7 +45,11 @@ describe "Backlogs API", type: :request do
     context "with valid data" do
       it "create a backlog" do
 
-        post "/v1/backlogs", params: backlog.to_json, headers: json_request_headers
+        post(
+          "/v1/backlogs",
+          params: backlog.to_json,
+          headers: json_request_headers
+        )
 
         expect(response).to have_http_status(:created)
         expect(response.content_type).to eq("application/json")
@@ -63,7 +64,11 @@ describe "Backlogs API", type: :request do
           backlog: { name: ""}
         }.to_json
 
-        post "/v1/backlogs", params: backlog_params, headers: json_request_headers
+        post(
+          "/v1/backlogs",
+          params: backlog_params,
+          headers: json_request_headers
+        )
 
         expect(response.content_type).to eq("application/json")
         expect(response).to have_http_status(:unprocessable_entity)
@@ -79,15 +84,16 @@ describe "Backlogs API", type: :request do
           backlog: { name: "marketing"}
         }.to_json
 
-        put "/v1/backlogs/#{backlog.id}", params: backlog_params, headers: json_request_headers
+        put(
+          "/v1/backlogs/#{backlog.id}",
+          params: backlog_params,
+          headers: json_request_headers
+        )
 
         expect(response.content_type).to eq("application/json")
         expect(response).to have_http_status(:ok)
 
-        body         = response_json
-        backlog_name = body["data"]["attributes"]["name"]
-
-        expect(backlog_name).to eq("marketing")
+        expect(response).to match_response_schema("backlogs")
       end
     end
 
@@ -97,7 +103,11 @@ describe "Backlogs API", type: :request do
           backlog: { name: ""}
         }.to_json
 
-        put "/v1/backlogs/#{backlog.id}", params: backlog_params, headers: json_request_headers
+        put(
+          "/v1/backlogs/#{backlog.id}",
+          params: backlog_params,
+          headers: json_request_headers
+        )
 
         expect(response.content_type).to eq("application/json")
         expect(response).to have_http_status(:unprocessable_entity)
