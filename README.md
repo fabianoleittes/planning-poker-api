@@ -54,6 +54,7 @@ What's in Version V1
 ### Application gems:
 * [Puma](https://github.com/puma/puma) as rails web server.
 * [Rack CORS](https://github.com/cyu/rack-cors) for [CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing).
+* [POW](http://pow.cx/) for subdomain.
 
 
 ### Development gems
