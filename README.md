@@ -34,6 +34,23 @@ After setting up, you can run the application using [Heroku Local]:
 
 ### What's included
 
+### Features
+
+What's in Version V1
+
+- [x] RESTful API
+- [x] JSON Schema implementation
+- [x] API versioning
+- [x] RSpec testing
+- [x] Setup scripts
+- [x] Usage of http methods/verbs
+- [x] Structured endpoints
+- [x] Return appropriate status code
+- [x] Create users
+- [x] Create backlogs
+- [x] Create stories
+- [x] Create score
+
 ### Application gems:
 * [Puma](https://github.com/puma/puma) as rails web server.
 * [Rack CORS](https://github.com/cyu/rack-cors) for [CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing).
