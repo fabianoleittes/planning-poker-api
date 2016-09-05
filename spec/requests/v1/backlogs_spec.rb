@@ -15,7 +15,7 @@ describe "Backlogs API", type: :request do
     end
 
     it "returns content_type" do
-      expect(response.content_type).to eq("application/json")
+      expect(response.content_type).to eq("application/vnd.api+json")
     end
 
     it "returns all the backlogs" do
@@ -37,7 +37,7 @@ describe "Backlogs API", type: :request do
     end
 
     it "returns content_type" do
-      expect(response.content_type).to eq("application/json")
+      expect(response.content_type).to eq("application/vnd.api+json")
     end
   end
 
@@ -52,7 +52,7 @@ describe "Backlogs API", type: :request do
         )
 
         expect(response).to have_http_status(:created)
-        expect(response.content_type).to eq("application/json")
+        expect(response.content_type).to eq("application/vnd.api+json")
         expect(Backlog.first.name).to eq(backlog.name)
 
       end
@@ -70,7 +70,7 @@ describe "Backlogs API", type: :request do
           headers: json_request_headers
         )
 
-        expect(response.content_type).to eq("application/json")
+        expect(response.content_type).to eq("application/vnd.api+json")
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
@@ -90,7 +90,7 @@ describe "Backlogs API", type: :request do
           headers: json_request_headers
         )
 
-        expect(response.content_type).to eq("application/json")
+        expect(response.content_type).to eq("application/vnd.api+json")
         expect(response).to have_http_status(:ok)
 
         expect(response).to match_response_schema("backlogs")
@@ -109,7 +109,7 @@ describe "Backlogs API", type: :request do
           headers: json_request_headers
         )
 
-        expect(response.content_type).to eq("application/json")
+        expect(response.content_type).to eq("application/vnd.api+json")
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end

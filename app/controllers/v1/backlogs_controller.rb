@@ -3,29 +3,29 @@ module V1
     before_action :set_backlog, only: %i[show update destroy]
 
     def index
-      @backlogs = Backlog.includes(:stories).all
-      render json: @backlogs
+      @backlogs = Backlog.all
+      render jsonapi: @backlogs
     end
 
     def show
-      render json: @backlog
+      render jsonapi: @backlog
     end
 
     def create
       @backlog =  Backlog.new(backlog_params)
 
       if @backlog.save
-        render json: @backlog, status: :created
+        render jsonapi: @backlog, status: :created
       else
-        render json: @backlog.errors, status: :unprocessable_entity
+        render jsonapi: @backlog.errors, status: :unprocessable_entity
       end
     end
 
     def update
       if @backlog.update(backlog_params)
-        render json: @backlog
+        render jsonapi: @backlog
       else
-        render json: @backlog.errors, status: :unprocessable_entity
+        render jsonapi: @backlog.errors, status: :unprocessable_entity
       end
     end
 
