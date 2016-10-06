@@ -2,6 +2,8 @@
 
 [![Code Climate](https://codeclimate.com/github/fabianoleittes/planning-poker-api/badges/gpa.svg)](https://codeclimate.com/github/fabianoleittes/planning-poker-api)
 
+[![Build Status](https://semaphoreci.com/api/v1/fabianoleittes/planning-poker-api/branches/master/badge.svg)](https://semaphoreci.com/fabianoleittes/planning-poker-api)
+
 ## Getting Started
 
 After you have cloned this repo, run this setup script to set up your machine
